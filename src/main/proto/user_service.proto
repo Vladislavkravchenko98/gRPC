@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.example.grpcuser.proto";
+option java_outer_classname = "UserServiceProto";
+
+package user.v1;
+
+service UserService {
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc AddCarsToUser(AddCarsToUserRequest) returns (AddCarsToUserResponse);
+}
+
+message CreateUserRequest {
+  string external_id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+}
+
+message CreateUserResponse {
+  string user_id = 1;
+  string external_id = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string email = 5;
+  repeated Car cars = 6;
+}
+
+message AddCarsToUserRequest {
+  string user_id = 1;
+  repeated CarInput cars = 2;
+}
+
+message AddCarsToUserResponse {
+  string user_id = 1;
+  repeated Car cars = 2;
+}
+
+message CarInput {
+  string vin = 1;
+  string brand = 2;
+  string model = 3;
+  int32 production_year = 4;
+}
+
+message Car {
+  string vin = 1;
+  string brand = 2;
+  string model = 3;
+  int32 production_year = 4;
+}

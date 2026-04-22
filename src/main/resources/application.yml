@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: grpc-user-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/grpc_user_service
+    username: grpc_user
+    password: grpc_password
+    hikari:
+      maximum-pool-size: 15
+      minimum-idle: 3
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          time_zone: UTC
+    open-in-view: false
+  flyway:
+    enabled: true
+
+grpc:
+  server:
+    port: 9090
+    reflection-service-enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
